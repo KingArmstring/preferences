@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Text Number 1 Settings">
+
+        <CheckBoxPreference android:key="FIRST_FONT"
+            android:title="ChunkFive"
+            android:summary="chose font Chunck Five"
+            android:defaultValue="Chunckfive.otf">
+        </CheckBoxPreference>
+
+        <CheckBoxPreference android:key="SECOND_FONT"
+            android:title="FontleroyBrown"
+            android:summary="chose font Frontleroy"
+            android:defaultValue="Frontleroy.ttf">
+        </CheckBoxPreference>
+
+        <ListPreference android:key="TEXT_SIZE"
+            android:title="Text Size"
+            android:dialogTitle="chose font size"
+            android:defaultValue="10"
+            android:entries="@array/entries"
+            android:entryValues="@array/entries_values">
+        </ListPreference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

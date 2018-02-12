@@ -6,74 +6,87 @@ import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.LinkedList;
+import java.util.List;
 
-    TextView txtView1;
+public class MainActivity extends AppCompatActivity {
 
 
     String txtView1Size;
-
-
     Typeface font1;
     Typeface font2;
+    RecyclerView recyclerView;
+    List<String> texts;
 
     SharedPreferences preferences;
+    RecyclerAdapter adapter;
+
+    Typeface font;
+    int textSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("Armstring", "onCreate 1");
-        txtView1 = (TextView) findViewById(R.id.txtView1);
-        Log.d("Armstring", "onCreate 2");
         font1 = Typeface.createFromAsset(getAssets(), "fonts/Chunkfive.otf");
-        Log.d("Armstring", "onCreate 3");
         font2 = Typeface.createFromAsset(getAssets(), "fonts/FontleroyBrown.ttf");
-        Log.d("Armstring", "onCreate 4");
         preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        Log.d("Armstring", "onCreate 5");
+
+        texts = new LinkedList<>();
+        for(int i = 0; i < 50; i++){
+            String str = "text: " + (i+1);
+            texts.add(str);
+        }
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerViewId);
+        adapter = new RecyclerAdapter(texts, this, font2, 20);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("Armstring", "onResume 1");
         specifyFont();
-        Log.d("Armstring", "onResume 2");
         specifyFontSize();
-        Log.d("Armstring", "onResume 3");
+
     }
 
     private void specifyFont(){
-        Log.d("Armstring", "specifyFont 3");
         boolean isFont1Checked = preferences.getBoolean("FIRST_FONT", false);
-        Log.d("Armstring", "specifyFont 4");
         boolean isFont2Checked = preferences.getBoolean("SECOND_FONT", false);
-        Log.d("Armstring", "specifyFont 5");
         if(isFont1Checked){
-            Log.d("Armstring", "specifyFont 6");
-            txtView1.setTypeface(font1);
-            Log.d("Armstring", "specifyFont 7");
+            //txtView1.setTypeface(font1);
+            font = font1;
+            adapter = new RecyclerAdapter(texts, MainActivity.this, font, textSize);
+            recyclerView.setAdapter(adapter);
         }else if(isFont2Checked){
-            Log.d("Armstring", "specifyFont 8");
-            txtView1.setTypeface(font2);
-            Log.d("Armstring", "specifyFont 9");
+            //txtView1.setTypeface(font2);
+            font = font2;
+            adapter = new RecyclerAdapter(texts, MainActivity.this, font, textSize);
+            recyclerView.setAdapter(adapter);
         }else{
-            Log.d("Armstring", "specifyFont 10");
-            txtView1.setTypeface(Typeface.DEFAULT);
-            Log.d("Armstring", "specifyFont 11");
+            //txtView1.setTypeface(Typeface.DEFAULT);
+            font = Typeface.DEFAULT;
+            adapter = new RecyclerAdapter(texts, MainActivity.this, font1, textSize);
+            recyclerView.setAdapter(adapter);
         }
     }
 
     private void specifyFontSize(){
         txtView1Size = preferences.getString("TEXT_SIZE","20");
-        int txtSizeIntegerValue = Integer.parseInt(txtView1Size);
-        txtView1.setTextSize(txtSizeIntegerValue);
+        textSize = Integer.parseInt(txtView1Size);
+        //txtView1.setTextSize(txtSizeIntegerValue);
+        adapter = new RecyclerAdapter(texts, MainActivity.this, font, textSize);
+        recyclerView.setAdapter(adapter);
+
     }
 
     @Override

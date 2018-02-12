@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PreferencesorSettings.iml" filepath="$PROJECT_DIR$/PreferencesorSettings.iml" />
+      <module fileurl="file://C:\Users\Darkwood\Desktop\RecyclerView With Fonts\preferences\PreferencesorSettings.iml" filepath="C:\Users\Darkwood\Desktop\RecyclerView With Fonts\preferences\PreferencesorSettings.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Darkwood\Desktop\RecyclerView With Fonts\preferences\app\app.iml" filepath="C:\Users\Darkwood\Desktop\RecyclerView With Fonts\preferences\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/preferences.iml" filepath="$PROJECT_DIR$/preferences.iml" />
     </modules>
   </component>
 </project>

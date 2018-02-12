@@ -17,15 +17,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/txtView1"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewId"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:text="TextView"
-                android:textColor="#000" />
-
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

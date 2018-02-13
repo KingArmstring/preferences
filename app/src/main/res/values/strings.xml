@@ -17,4 +17,16 @@
         <item>35</item>
         <item>40</item>
     </string-array>
+
+    <string-array name="fonts">
+        <item>Chunk Five</item>
+        <item>Font leroy</item>
+        <item>Wounder Demo</item>
+    </string-array>
+
+    <string-array name="fonts_values">
+        <item>Chunkfive.otf</item>
+        <item>FontleroyBrown.otf</item>
+        <item>Wonderbar Demo.otf</item>
+    </string-array>
 </resources>

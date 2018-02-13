@@ -18,18 +18,20 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = "Armstring";
 
-    String txtView1Size;
-    Typeface font1;
-    Typeface font2;
-    RecyclerView recyclerView;
-    List<String> texts;
+    private String txtView1Size;
+    private Typeface font1;
+    private Typeface font2;
+    private Typeface font3;
+    private RecyclerView recyclerView;
+    private List<String> texts;
 
-    SharedPreferences preferences;
-    RecyclerAdapter adapter;
+    private SharedPreferences preferences;
+    private RecyclerAdapter adapter;
 
-    Typeface font;
-    int textSize;
+    private Typeface font;
+    private int textSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         font1 = Typeface.createFromAsset(getAssets(), "fonts/Chunkfive.otf");
         font2 = Typeface.createFromAsset(getAssets(), "fonts/FontleroyBrown.ttf");
+        font3 = Typeface.createFromAsset(getAssets(), "fonts/Wonderbar Demo.otf");
         preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
 
         texts = new LinkedList<>();
@@ -60,22 +63,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void specifyFont(){
-        boolean isFont1Checked = preferences.getBoolean("FIRST_FONT", false);
-        boolean isFont2Checked = preferences.getBoolean("SECOND_FONT", false);
-        if(isFont1Checked){
-            //txtView1.setTypeface(font1);
+        String fontName = preferences.getString("TEXT_FONT", "Chunkfive.otf");
+        Log.d(TAG, "specifyFont: " + fontName);
+        if(fontName.matches("Chunkfive.otf")){
+            Log.d(TAG, "specifyFont: 1");
             font = font1;
             adapter = new RecyclerAdapter(texts, MainActivity.this, font, textSize);
             recyclerView.setAdapter(adapter);
-        }else if(isFont2Checked){
-            //txtView1.setTypeface(font2);
+        }else if(fontName.matches("FontleroyBrown.ttf")){
+            Log.d(TAG, "specifyFont: 2");
             font = font2;
             adapter = new RecyclerAdapter(texts, MainActivity.this, font, textSize);
             recyclerView.setAdapter(adapter);
-        }else{
-            //txtView1.setTypeface(Typeface.DEFAULT);
-            font = Typeface.DEFAULT;
-            adapter = new RecyclerAdapter(texts, MainActivity.this, font1, textSize);
+        }else {
+            Log.d(TAG, "specifyFont: 3");
+            font = font3;
+            adapter = new RecyclerAdapter(texts, MainActivity.this, font, textSize);
             recyclerView.setAdapter(adapter);
         }
     }
@@ -83,10 +86,8 @@ public class MainActivity extends AppCompatActivity {
     private void specifyFontSize(){
         txtView1Size = preferences.getString("TEXT_SIZE","20");
         textSize = Integer.parseInt(txtView1Size);
-        //txtView1.setTextSize(txtSizeIntegerValue);
         adapter = new RecyclerAdapter(texts, MainActivity.this, font, textSize);
         recyclerView.setAdapter(adapter);
-
     }
 
     @Override
